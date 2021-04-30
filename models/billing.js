@@ -1,0 +1,61 @@
+import Sequelize from "sequelize";
+import {sequelize} from "../db/dbConnect.js";
+
+const Bills = sequelize.define('billing', {
+    BID: {
+      autoIncrement: true,
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      primaryKey: true
+    },
+    PremiseId: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'premise',
+        key: 'PremiseId'
+      }
+    },
+    UserID: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'user',
+        key: 'UserID'
+      }
+    },
+    Reading: {
+      type: Sequelize.FLOAT,
+      allowNull: true,
+    }
+
+  }, {
+    sequelize,
+    tableName: 'billing',
+    timestamps: false,
+    indexes: [
+      {
+        name: "PRIMARY",
+        unique: true,
+        using: "BTREE",
+        fields: [
+          { name: "BID" },
+        ]
+      },
+      {
+        name: "billing_ibfk_1",
+        using: "BTREE",
+        fields: [
+          { name: "PremiseId" },
+        ]
+      },
+      {
+        name: "billing_ibfk_2",
+        using: "BTREE",
+        fields: [
+          { name: "UserID" },
+        ]
+      },
+    ]
+  });
+export default Bills

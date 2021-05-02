@@ -13,8 +13,6 @@ export async function addUser(req, res) {
                 Email: req.body.Email,
                 Password: hash,
                 UserName: req.body.UserName,
-                SID: req.body.SID,
-                ZID: req.body.ZID
             }
             let user = await Users.create(userObj);
             if (user) {
@@ -110,13 +108,13 @@ export async function signIn(req, res) {
                     message: "Authentication Failed: Incorrect password."
                 })
             }
-            let authToken = jwt.sign({ Email: user.Email, UserID: user.UserID },
-                process.env.AUTH_KEY, { expiresIn: "1h" });
+            // let authToken = jwt.sign({ Email: user.Email, UserID: user.UserID },
+            //     process.env.AUTH_KEY, { expiresIn: "1h" });
             return res.status(200).json({
                 status: true,
                 message: "User authentication successful",
                 user: { UserName: user.UserName, Email: user.Email, UserID: user.UserID },
-                token: authToken,
+                // token: authToken,
                 expiresIn: 3600
             })
         })

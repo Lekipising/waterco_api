@@ -29,7 +29,7 @@ const Payments = sequelize.define('payment', {
       allowNull: true,
       references: {
         model: 'premise',
-        key: 'PremiseId'
+        key: 'PremiseIdp'
       }
     }
   }, {

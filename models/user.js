@@ -8,14 +8,14 @@ const Users = sequelize.define('user', {
     allowNull: false,
     primaryKey: true
   },
-  SID: {
-    type: Sequelize.INTEGER,
-    allowNull: true,
-    references: {
-      model: 'sector',
-      key: 'SID'
-    }
-  },
+  // SID: {
+  //   type: Sequelize.INTEGER,
+  //   allowNull: true,
+  //   references: {
+  //     model: 'sector',
+  //     key: 'SIDu'
+  //   }
+  // },
   UserName: {
     type: Sequelize.STRING(255),
     allowNull: true
@@ -24,14 +24,14 @@ const Users = sequelize.define('user', {
     type: Sequelize.STRING(255),
     allowNull: true
   },
-  ZID: {
-    type: Sequelize.INTEGER,
-    allowNull: true,
-    references: {
-      model: 'zone',
-      key: 'ZID'
-    }
-  },
+  // ZID: {
+  //   type: Sequelize.INTEGER,
+  //   allowNull: true,
+  //   references: {
+  //     model: 'zone',
+  //     key: 'ZID'
+  //   }
+  // },
   Password: {
     type: Sequelize.STRING(255),
     allowNull: true

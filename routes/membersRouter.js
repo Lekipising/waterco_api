@@ -5,7 +5,7 @@ import { authenticate } from '../middlewares/auth.js';
 const membersRouter = express.Router();
 
 //Add a Member
-membersRouter.post("/", authenticate, addMember);
+membersRouter.post("/", addMember);
 
 //View a member members/:id
 membersRouter.get("/:id",authenticate, viewMember);

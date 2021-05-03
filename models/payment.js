@@ -8,12 +8,12 @@ const Payments = sequelize.define('payment', {
       allowNull: false,
       primaryKey: true
     },
-    BID: {
+    billid: {
       type: Sequelize.INTEGER,
       allowNull: true,
       references: {
         model: 'billing',
-        key: 'BID'
+        key: 'billid'
       }
     },
     ExpectedAmount: {
@@ -46,10 +46,10 @@ const Payments = sequelize.define('payment', {
         ]
       },
       {
-        name: "BID",
+        name: "billid",
         using: "BTREE",
         fields: [
-          { name: "BID" },
+          { name: "billid" },
         ]
       },
       {

@@ -29,7 +29,7 @@ export async function addRoute(req, res) {
 //View a route
 export async function viewRoute(req, res) {
     try {
-        let oneroute = await Routes.findAll({where: {RID: req.params.id}});
+        let oneroute = await Routes.findAll({where: {Routeid: req.params.id}});
         if (oneroute) {
             res.json({
                 success: true,
@@ -80,7 +80,7 @@ export async function viewAllRoutes(req, res) {
 export async function updateRoute(req, res) {
     try {
         
-        let updatedroute = await Routes.update(req.body,{where:{RID: req.params.id}});
+        let updatedroute = await Routes.update(req.body,{where:{Routeid: req.params.id}});
         if (updatedroute) {
             res.json({
                 success: true,

@@ -2,7 +2,7 @@ import Sequelize from "sequelize";
 import {sequelize} from "../db/dbConnect.js";
 
 const Bills = sequelize.define('billing', {
-    BID: {
+    billid: {
       autoIncrement: true,
       type: Sequelize.INTEGER,
       allowNull: false,
@@ -39,7 +39,7 @@ const Bills = sequelize.define('billing', {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "BID" },
+          { name: "billid" },
         ]
       },
       {

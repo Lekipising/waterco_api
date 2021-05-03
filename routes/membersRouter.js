@@ -11,7 +11,7 @@ membersRouter.post("/", addMember);
 membersRouter.get("/:id",authenticate, viewMember);
 
 //View all members members/
-membersRouter.get("/",authenticate, viewAllMembers);
+membersRouter.get("/", viewAllMembers);
 
 //Update member record members/
 membersRouter.put("/:id",authenticate, updateMember);

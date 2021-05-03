@@ -14,7 +14,7 @@ usersRouter.post("/signin", signIn);
 usersRouter.get("/:id", authenticate, viewUser);
 
 //View all Users users/ - Authenticate.
-usersRouter.get("/", authenticate, viewAllUsers);
+usersRouter.get("/", viewAllUsers);
 
 //Update user record users/id
 usersRouter.put("/:id",authenticate, updateUser);

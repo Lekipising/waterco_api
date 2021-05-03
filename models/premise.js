@@ -20,12 +20,12 @@ const Premises = sequelize.define('premise', {
         key: 'Customerid'
       }
     },
-    RID: {
+    Routeid: {
       type: Sequelize.INTEGER,
       allowNull: false,
       references: {
         model: 'route',
-        key: 'RID'
+        key: 'Routeid'
       }
     }
   }, {
@@ -49,10 +49,10 @@ const Premises = sequelize.define('premise', {
         ]
       },
       {
-        name: "RID",
+        name: "Routeid",
         using: "BTREE",
         fields: [
-          { name: "RID" },
+          { name: "Routeid" },
         ]
       },
     ]

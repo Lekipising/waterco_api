@@ -28,7 +28,7 @@ export async function captureBill(req, res) {
 //View a bill
 export async function viewBill(req, res) {
     try {
-        let onebill = await Bills.findAll({where: {BID: req.params.id}});
+        let onebill = await Bills.findAll({where: {billid: req.params.id}});
         if (onebill) {
             res.json({
                 success: true,
@@ -49,3 +49,29 @@ export async function viewBill(req, res) {
         })
     }
 }
+
+//View all Payments
+export async function viewAllBills(req, res) {
+    try {
+        let allBills = await Bills.findAll();
+        if (allBills) {
+            res.json({
+                success: true,
+                message: 'Bill records retrieved successfully',
+                data: allBills
+            })
+        } else {
+            res.json({
+                success: true,
+                message: 'No bill records found.',
+            })
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({
+            success: false,
+            message: "Oopss! Something is wrong..."
+        })
+    }
+}
+

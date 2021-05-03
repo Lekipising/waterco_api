@@ -17,5 +17,3 @@ router.use("/routes", routesRouter);
 router.use("/users", usersRouter);
 
 export default router;
-// $2a$10$uyObb8YM3a9A1/sP/8rdj.s.cOiuJq4RspdufsLlKn1kEhKxH2cE.
-// $2a$10$FlRQnvl3hqTQNcgAILCpeeyuU4i1PhYgnRfVwkYzjNaJumxESqUYy

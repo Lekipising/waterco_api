@@ -27,6 +27,10 @@ const Bills = sequelize.define('billing', {
     Reading: {
       type: Sequelize.FLOAT,
       allowNull: true,
+    },
+    Amount: {
+      type: Sequelize.INTEGER,
+      allowNull: true,
     }
 
   }, {

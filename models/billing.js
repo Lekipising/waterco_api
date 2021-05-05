@@ -2,7 +2,7 @@ import Sequelize from "sequelize";
 import {sequelize} from "../db/dbConnect.js";
 
 const Bills = sequelize.define('billing', {
-    BID: {
+    billid: {
       autoIncrement: true,
       type: Sequelize.INTEGER,
       allowNull: false,
@@ -27,19 +27,28 @@ const Bills = sequelize.define('billing', {
     Reading: {
       type: Sequelize.FLOAT,
       allowNull: true,
+    },
+    Amount: {
+      type: Sequelize.INTEGER,
+      allowNull: true,
+    },
+    Status: {
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
     }
 
   }, {
     sequelize,
     tableName: 'billing',
-    timestamps: false,
+    timestamps: true,
     indexes: [
       {
         name: "PRIMARY",
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "BID" },
+          { name: "billid" },
         ]
       },
       {

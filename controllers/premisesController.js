@@ -4,18 +4,26 @@ import Premises from "../models/premise.js";
 //Add a Premise
 export async function addPremise(req, res) {
     try {
-        let premise = await Premises.create(req.body);
-        if (premise) {
-            res.status(200).json({
-                success: true,
-                message: 'Premise created successfully',
-                data: premise
-            })
+        let premiseExists = await Premises.findAll({where: {MeterNo: req.body.MeterNo}});
+        if (premiseExists) {
+            res.status(500).json({
+            success: false,
+            message: "Oopss! Meter NO already exists already exists..."
+            });
         } else {
-            res.status(200).json({
-                success: true,
-                message: 'Premise could not be created at this time'
-            })
+            let premise = await Premises.create(req.body);
+            if (premise) {
+                res.status(200).json({
+                    success: true,
+                    message: 'Premise created successfully',
+                    data: premise
+                })
+            } else {
+                res.status(200).json({
+                    success: true,
+                    message: 'Premise could not be created at this time'
+                })
+            }
         }
     } catch (err) {
         console.log(err);
@@ -104,7 +112,7 @@ export async function viewPremisesByMember(req, res) {
 // View Premises by route
 export async function viewPremisesByRoute(req, res) {
     try {
-        let onepremise = await Premises.findAll({where: {RID: req.params.id}});
+        let onepremise = await Premises.findAll({where: {Routeid: req.params.id}});
         if (onepremise) {
             res.json({
                 success: true,

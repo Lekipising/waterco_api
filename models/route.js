@@ -2,7 +2,7 @@ import Sequelize from 'sequelize';
 import {sequelize} from "../db/dbConnect.js";
 
 const Routes = sequelize.define('route', {
-    RID: {
+    Routeid: {
       autoIncrement: true,
       type: Sequelize.INTEGER,
       allowNull: false,
@@ -14,7 +14,8 @@ const Routes = sequelize.define('route', {
     },
     Status: {
       type: Sequelize.BOOLEAN,
-      allowNull: true
+      allowNull: true,
+      defaultValue: true
     }
   }, {
     sequelize,
@@ -26,7 +27,7 @@ const Routes = sequelize.define('route', {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "RID" },
+          { name: "Routeid" },
         ]
       },
     ]

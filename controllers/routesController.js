@@ -4,18 +4,26 @@ import Routes from "../models/route.js";
 //Add a route
 export async function addRoute(req, res) {
     try {
-        let route = await Routes.create(req.body);
-        if (route) {
-            res.status(200).json({
-                success: true,
-                message: 'Route created successfully',
-                data: route
-            })
+        let routeExists = await Routes.findAll({where: {Route_name: req.body.Route_name}});
+        if (routeExists) {
+            res.status(500).json({
+            success: false,
+            message: "Oopss! The route name already exists..."
+            });
         } else {
-            res.status(200).json({
-                success: true,
-                message: 'Route could not be created at this time'
-            })
+            let route = await Routes.create(req.body);
+            if (route) {
+                res.status(200).json({
+                    success: true,
+                    message: 'Route created successfully',
+                    data: route
+                })
+            } else {
+                res.status(200).json({
+                    success: true,
+                    message: 'Route could not be created at this time'
+                })
+            }
         }
     } catch (err) {
         console.log(err);
@@ -29,7 +37,7 @@ export async function addRoute(req, res) {
 //View a route
 export async function viewRoute(req, res) {
     try {
-        let oneroute = await Routes.findAll({where: {RID: req.params.id}});
+        let oneroute = await Routes.findAll({where: {Routeid: req.params.id}});
         if (oneroute) {
             res.json({
                 success: true,
@@ -80,7 +88,7 @@ export async function viewAllRoutes(req, res) {
 export async function updateRoute(req, res) {
     try {
         
-        let updatedroute = await Routes.update(req.body,{where:{RID: req.params.id}});
+        let updatedroute = await Routes.update(req.body,{where:{Routeid: req.params.id}});
         if (updatedroute) {
             res.json({
                 success: true,

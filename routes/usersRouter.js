@@ -5,7 +5,7 @@ import { authenticate } from '../middlewares/auth.js';
 const usersRouter = express.Router();
 
 //Add a User - Sign Up - Authenticate.
-usersRouter.post("/", authenticate, addUser);
+usersRouter.post("/", addUser);
 
 //Add a User - Sign In - No need of Authentication
 usersRouter.post("/signin", signIn);
@@ -14,7 +14,7 @@ usersRouter.post("/signin", signIn);
 usersRouter.get("/:id", authenticate, viewUser);
 
 //View all Users users/ - Authenticate.
-usersRouter.get("/", authenticate, viewAllUsers);
+usersRouter.get("/", viewAllUsers);
 
 //Update user record users/id
 usersRouter.put("/:id",authenticate, updateUser);

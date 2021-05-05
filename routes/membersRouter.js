@@ -8,15 +8,15 @@ const membersRouter = express.Router();
 membersRouter.post("/", addMember);
 
 //View a member members/:id
-membersRouter.get("/:id",authenticate, viewMember);
+membersRouter.get("/:id", viewMember);
 
 //View all members members/
 membersRouter.get("/", viewAllMembers);
 
 //Update member record members/
-membersRouter.put("/:id",authenticate, updateMember);
+membersRouter.put("/:id", updateMember);
 
 //Delete a member members/:id
-membersRouter.delete("/:id", authenticate, deleteMember);
+membersRouter.delete("/:id", deleteMember);
 
 export default membersRouter;

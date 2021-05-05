@@ -1,6 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
+import cors from "cors";
 import router from "./routes/index.js";
 import cors from "cors";
 
@@ -14,6 +15,7 @@ app.use(router);
 
 const port = process.env.PORT || "3001";
 
+
 app.get('/', (req, res)=>{
     res.send("Welcome to The WaterCo API");
 });
@@ -22,7 +24,8 @@ app.listen(port, ()=>{
     console.log(`WaterCo API Running on Port ${port}`);
 });
 
-// // Add headers
+
+// Add headers
 app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
@@ -32,7 +35,7 @@ app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 
     // Request headers you wish to allow
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type', 'origin');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type', 'origin', 'Authorization');
 
     // Set to true if you need the website to include cookies in the requests sent
     // to the API (e.g. in case you use sessions)
@@ -45,6 +48,5 @@ app.use(function (req, res, next) {
     else {
       next();
     }});
-
 
 export default app;

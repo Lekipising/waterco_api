@@ -1,10 +1,11 @@
 import express from "express";
 import { addRoute, viewAllRoutes, viewRoute, updateRoute} from '../controllers/routesController.js'
+import { authenticate } from '../middlewares/auth.js';
 
 const routesRouter = express.Router();
 
 //Add a Route
-routesRouter.post("/", addRoute);
+routesRouter.post("/", authenticate, addRoute);
 
 //View a route routes/:id
 routesRouter.get("/:id", viewRoute);

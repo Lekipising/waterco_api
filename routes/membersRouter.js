@@ -5,18 +5,18 @@ import { authenticate } from '../middlewares/auth.js';
 const membersRouter = express.Router();
 
 //Add a Member
-membersRouter.post("/", authenticate, addMember);
+membersRouter.post("/", addMember);
 
 //View a member members/:id
-membersRouter.get("/:id",authenticate, viewMember);
+membersRouter.get("/:id", viewMember);
 
 //View all members members/
-membersRouter.get("/",authenticate, viewAllMembers);
+membersRouter.get("/", viewAllMembers);
 
 //Update member record members/
-membersRouter.put("/:id",authenticate, updateMember);
+membersRouter.put("/:id", updateMember);
 
 //Delete a member members/:id
-membersRouter.delete("/:id", authenticate, deleteMember);
+membersRouter.delete("/:id", deleteMember);
 
 export default membersRouter;

@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import dotenv from 'dotenv';
+import Cookie from 'js-cookie';
 import Users from "../models/user.js";
 
 dotenv.config();
@@ -112,6 +113,11 @@ export async function signIn(req, res) {
             }
             let authToken = jwt.sign({ Email: user.Email, UserID: user.UserID },
                 process.env.AUTH_KEY, { expiresIn: "1h" });
+            // res.cookie("authToken", authToken, {
+            //     httpOnly: true,
+            //     sameSite: "strict",
+            // });
+            
             return res.status(200).json({
                 status: true,
                 message: "User authentication successful",
@@ -135,11 +141,11 @@ export async function updateUserPass(req, res) {
     try {
         bcrypt.hash(req.body.Password, 10).then(async (hash) => {
             let userObj = {
-                
+
                 Password: hash
-                
+
             }
-            let user = await Users.update(userObj, {where:{UserID: req.params.id}});
+            let user = await Users.update(userObj, { where: { UserID: req.params.id } });
             if (user) {
                 res.status(200).json({
                     success: true,
@@ -166,8 +172,8 @@ export async function updateUserPass(req, res) {
 //Update user record
 export async function updateUser(req, res) {
     try {
-        
-        let updateduser = await Users.update(req.body,{where:{UserID: req.params.id}});
+
+        let updateduser = await Users.update(req.body, { where: { UserID: req.params.id } });
         if (updateduser) {
             res.json({
                 success: true,
@@ -192,15 +198,15 @@ export async function updateUser(req, res) {
 // Delete user
 export async function deleteUser(req, res) {
     try {
-        
-        let userToDelete = await Users.findAll({where:{UserID:req.params.id}});
+
+        let userToDelete = await Users.findAll({ where: { UserID: req.params.id } });
         if (userToDelete) {
-            let deleteduser = await Users.destroy({where:{UserID:req.params.id}});
-            if (deleteduser){
+            let deleteduser = await Users.destroy({ where: { UserID: req.params.id } });
+            if (deleteduser) {
                 res.json({
                     success: true,
                     message: 'User records deleted successfully',
-                    
+
                 })
             } else {
                 res.json({
@@ -210,7 +216,7 @@ export async function deleteUser(req, res) {
             }
 
         }
-            
+
     } catch (err) {
         console.log(err);
         res.status(500).json({

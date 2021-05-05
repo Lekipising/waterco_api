@@ -31,12 +31,17 @@ const Bills = sequelize.define('billing', {
     Amount: {
       type: Sequelize.INTEGER,
       allowNull: true,
+    },
+    Status: {
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
     }
 
   }, {
     sequelize,
     tableName: 'billing',
-    timestamps: false,
+    timestamps: true,
     indexes: [
       {
         name: "PRIMARY",

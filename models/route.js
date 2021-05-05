@@ -14,7 +14,8 @@ const Routes = sequelize.define('route', {
     },
     Status: {
       type: Sequelize.BOOLEAN,
-      allowNull: true
+      allowNull: true,
+      defaultValue: true
     }
   }, {
     sequelize,

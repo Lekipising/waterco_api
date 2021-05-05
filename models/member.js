@@ -16,10 +16,14 @@ const Customers = sequelize.define('customer', {
       type: Sequelize.INTEGER,
       allowNull: true
     },
+    Email: {
+      type: Sequelize.STRING(255),
+      allowNull: true
+    },
   }, {
     sequelize,
     tableName: 'customer',
-    timestamps: false,
+    timestamps: true,
     indexes: [
       {
         name: "PRIMARY",

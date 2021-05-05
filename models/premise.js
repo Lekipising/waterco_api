@@ -31,7 +31,7 @@ const Premises = sequelize.define('premise', {
   }, {
     sequelize,
     tableName: 'premise',
-    timestamps: false,
+    timestamps: true,
     indexes: [
       {
         name: "PRIMARY",

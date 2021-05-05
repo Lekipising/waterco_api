@@ -1,17 +1,27 @@
 import Payments from "../models/payment.js";
 import Bills from "../models/billing.js";
+import Customers from "../models/member.js";
+import Premises from "../models/premise.js";
 
 
 //Add a payment
 export async function capturePayment(req, res) {
     try {
-        // let payment = await Payments.create(req.body);
+        // implement hiding billid - automatic
         let bill = await Bills.findAll({where: {billid: req.body.billid}});
         let toPay = bill[0].Amount;
+        let toPayId = bill[0].billid;
         let toPremise = bill[0].PremiseId;
-        if (toPay < req.body.PaidAmount){
-            console.log("Paid less");
-        }
+
+        let custp = await Premises.findAll({where: {PremiseId: toPremise}});
+        let cust = await Customers.findAll({where: {Customerid: custp[0].Customerid}});
+        let sendToMail = cust[0].Email;
+        // check if bill has already been paid
+        // if (bill[0].Status) {
+            
+        // } else {
+            
+        // }
         let paymentObj = {
                 billid: req.body.billid,
                 ExpectedAmount: toPay,
@@ -19,6 +29,12 @@ export async function capturePayment(req, res) {
                 PremiseId: toPremise
             }
         let payment = await Payments.create(paymentObj);
+        bill[0].Status = true;
+        let newStatus = await Bills.findAll({where:{billid: req.body.billid}});
+        let rem = toPay - payment.PaidAmount
+        if (payment.PaidAmount >= toPay){
+            newStatus[0].update({Status : true})
+        }
         if (payment) {
             res.status(200).json({
                 success: true,

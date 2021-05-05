@@ -8,7 +8,14 @@ dotenv.config();
 //Add a User - Sign Up
 export async function addUser(req, res) {
     try {
-        bcrypt.hash(req.body.Password, 10).then(async (hash) => {
+        let userExists = await Users.findAll({where: {Email: req.body.Email}});
+        if (userExists) {
+            res.status(500).json({
+            success: false,
+            message: "Oopss! User Email already exists..."
+            });
+        } else {
+            bcrypt.hash(req.body.Password, 10).then(async (hash) => {
             let userObj = {
                 Email: req.body.Email,
                 Password: hash,
@@ -28,7 +35,7 @@ export async function addUser(req, res) {
                 })
             }
         });
-
+        }
     } catch (err) {
         console.log(err);
         res.status(500).json({

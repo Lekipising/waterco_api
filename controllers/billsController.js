@@ -1,9 +1,11 @@
 import Bills from "../models/billing.js";
+import Customers from "../models/member.js";
+import Premises from "../models/premise.js";
+import nodemailer from "nodemailer";
 
 //Add a Bill
 export async function captureBill(req, res) {
     try {
-        // let bill = await Bills.create(req.body);
         let billObj = {
                 PremiseId: req.body.PremiseId,
                 UserID: req.body.UserID,
@@ -11,8 +13,13 @@ export async function captureBill(req, res) {
                 Amount: req.body.Reading * 10
             }
         let bill = await Bills.create(billObj);
+        let custp = await Premises.findAll({where: {PremiseId: req.body.PremiseId}});
+        let cust = await Customers.findAll({where: {Customerid: custp[0].Customerid}});
+        let sendToMail = cust[0].Email;
+
         if (bill) {
             // send email
+            // access ya29.a0AfH6SMAVs5WAR3gPsOSHJV-rTe-9iR77TbaooCzHjMdoVJH68WAMGCwN6AXIh5HuUz-ENb1qoXSia0MCrhVvvTaVHK6fc2helZQRVrjpQgk6lAvEEE35FpJIS3gJB2pSU2PEFco2GOYQmkEt5b3sxK8eMucn
             let transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
@@ -22,6 +29,26 @@ export async function captureBill(req, res) {
                 clientId: process.env.OAUTH_CLIENTID,
                 clientSecret: process.env.OAUTH_CLIENT_SECRET,
                 refreshToken: process.env.OAUTH_REFRESH_TOKEN
+            }
+            });
+
+            let mailOptions = {
+                from: process.env.MAIL_USERNAME,
+                to: sendToMail,
+                subject: `Bill for the month`,
+                text: `Hi, our esteemed customer. 
+                Please pay your bill. Below are the details: \n
+                Bill ID : ` + bill.billid + ` 
+                Premise ID : ` + bill.PremiseId + `
+                Amount to Pay : Rwf ` + bill.Amount + `
+                \nClick here to PAY : http://localhost:5500/paybill.html`
+            };
+
+            transporter.sendMail(mailOptions, function(err, data) {
+            if (err) {
+                console.log("Error " + err);
+            } else {
+                console.log("Email sent successfully");
             }
             });
             // ...... //

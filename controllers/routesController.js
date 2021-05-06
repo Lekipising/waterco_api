@@ -4,13 +4,13 @@ import Routes from "../models/route.js";
 //Add a route
 export async function addRoute(req, res) {
     try {
-        let routeExists = await Routes.findAll({where: {Route_name: req.body.Route_name}});
-        if (routeExists) {
-            res.status(500).json({
-            success: false,
-            message: "Oopss! The route name already exists..."
-            });
-        } else {
+        // let routeExists = await Routes.findAll({where: {Route_name: req.body.Route_name}});
+        // if (routeExists) {
+        //     res.status(500).json({
+        //     success: false,
+        //     message: "Oopss! The route name already exists..."
+        //     });
+        // } else {
             let route = await Routes.create(req.body);
             if (route) {
                 res.status(200).json({
@@ -24,7 +24,7 @@ export async function addRoute(req, res) {
                     message: 'Route could not be created at this time'
                 })
             }
-        }
+        
     } catch (err) {
         console.log(err);
         res.status(500).json({

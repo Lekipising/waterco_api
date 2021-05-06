@@ -4,13 +4,13 @@ import Premises from "../models/premise.js";
 //Add a Premise
 export async function addPremise(req, res) {
     try {
-        let premiseExists = await Premises.findAll({where: {MeterNo: req.body.MeterNo}});
-        if (premiseExists) {
-            res.status(500).json({
-            success: false,
-            message: "Oopss! Meter NO already exists already exists..."
-            });
-        } else {
+        // let premiseExists = await Premises.findAll({where: {MeterNo: req.body.MeterNo}});
+        // if (premiseExists) {
+        //     res.status(500).json({
+        //     success: false,
+        //     message: "Oopss! Meter NO already exists already exists..."
+        //     });
+        // } else {
             let premise = await Premises.create(req.body);
             if (premise) {
                 res.status(200).json({
@@ -24,7 +24,7 @@ export async function addPremise(req, res) {
                     message: 'Premise could not be created at this time'
                 })
             }
-        }
+        
     } catch (err) {
         console.log(err);
         res.status(500).json({

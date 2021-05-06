@@ -3,14 +3,14 @@ import Customers from "../models/member.js";
 //Add a Member
 export async function addMember(req, res) {
     try {
-        // check if email exists
-        let memberExists = await Customers.findAll({where: {Email: req.body.Email}});
-        if (memberExists) {
-            res.status(500).json({
-            success: false,
-            message: "Oopss! Client Email already exists..."
-        })
-        } else {
+        // // check if email exists
+        // let memberExists = await Customers.findAll({where: {Email: req.body.Email}});
+        // if (memberExists) {
+        //     res.status(500).json({
+        //     success: false,
+        //     message: "Oopss! Client Email already exists..."
+        // })
+        // } else {
             let member = await Customers.create(req.body);
             if (member) {
             res.status(200).json({
@@ -24,7 +24,7 @@ export async function addMember(req, res) {
                 message: 'Member could not be created at this time'
             })
             }
-        }
+        
     } catch (err) {
         console.log(err);
         res.status(500).json({

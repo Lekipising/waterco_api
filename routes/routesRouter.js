@@ -8,12 +8,12 @@ const routesRouter = express.Router();
 routesRouter.post("/", authenticate, addRoute);
 
 //View a route routes/:id
-routesRouter.get("/:id", authenticate, viewRoute);
+routesRouter.get("/:id", viewRoute);
 
 //View all routes routes/
-routesRouter.get("/", authenticate, viewAllRoutes);
+routesRouter.get("/", viewAllRoutes);
 
 //Update route record routes/
-routesRouter.put("/:id", authenticate, updateRoute);
+routesRouter.put("/:id", updateRoute);
 
 export default routesRouter;

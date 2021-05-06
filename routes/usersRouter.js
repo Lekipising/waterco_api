@@ -11,7 +11,7 @@ usersRouter.post("/", addUser);
 usersRouter.post("/signin", signIn);
 
 //View a User users/:id - Authenticate.
-usersRouter.get("/:id", authenticate, viewUser);
+usersRouter.get("/:id", viewUser);
 
 //View all Users users/ - Authenticate.
 usersRouter.get("/", viewAllUsers);

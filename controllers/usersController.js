@@ -1,7 +1,6 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import dotenv from 'dotenv';
-import Cookie from 'js-cookie';
 import Users from "../models/user.js";
 
 dotenv.config();
@@ -16,7 +15,7 @@ export async function addUser(req, res) {
         //     message: "Oopss! User Email already exists..."
         //     });
         // } else {
-            bcrypt.hash(req.body.Password, 10).then(async (hash) => {
+        bcrypt.hash(req.body.Password, 10).then(async (hash) => {
             let userObj = {
                 Email: req.body.Email,
                 Password: hash,
@@ -36,7 +35,7 @@ export async function addUser(req, res) {
                 })
             }
         });
-        
+
     } catch (err) {
         console.log(err);
         res.status(500).json({
@@ -119,6 +118,7 @@ export async function signIn(req, res) {
 
             let authToken = jwt.sign({ Email: user.Email, UserID: user.UserID },
                 process.env.AUTH_KEY, { expiresIn: "1h" });
+
             return res.status(200).json({
                 status: true,
                 message: "User authentication successful",

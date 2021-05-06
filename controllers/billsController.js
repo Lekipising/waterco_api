@@ -16,6 +16,7 @@ export async function captureBill(req, res) {
         let custp = await Premises.findAll({where: {PremiseId: req.body.PremiseId}});
         let cust = await Customers.findAll({where: {Customerid: custp[0].Customerid}});
         let sendToMail = cust[0].Email;
+        console.log("Premise ID" + req.body.PremiseId);
 
         if (bill) {
             // send email

@@ -24,11 +24,12 @@ export async function addUser(req, res) {
             }
             let user = await Users.create(userObj);
             if (user) {
-                res.status(200).json({
-                    success: true,
-                    message: 'User created successfully',
-                    data: user
-                })
+                res.status(200).redirect('http://127.0.0.1:5500/index.html')
+                // res.status(200).json({
+                //     success: true,
+                //     message: 'User created successfully',
+                //     data: user
+                // })
             } else {
                 res.status(200).json({
                     success: true,
@@ -123,6 +124,7 @@ export async function signIn(req, res) {
             //     httpOnly: true,
             //     sameSite: "strict",
             // });
+            // res.status(200).redirect('http://127.0.0.1:5500/index.html')
             return res.status(200).json({
                 status: true,
                 message: "User authentication successful",

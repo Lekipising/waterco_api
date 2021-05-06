@@ -3,7 +3,7 @@ import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import cors from "cors";
 import router from "./routes/index.js";
-import cors from "cors";
+
 
 const app = express();
 dotenv.config()
@@ -50,3 +50,6 @@ app.use(function (req, res, next) {
     }});
 
 export default app;
+// add extra fields - remove fields
+// View all ---
+// 

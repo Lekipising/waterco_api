@@ -2,6 +2,7 @@ import Bills from "../models/billing.js";
 import Customers from "../models/member.js";
 import Premises from "../models/premise.js";
 import nodemailer from "nodemailer";
+import alert from "alert";
 
 //Add a Bill
 export async function captureBill(req, res) {
@@ -41,7 +42,7 @@ export async function captureBill(req, res) {
                 Bill ID : ` + bill.billid + ` 
                 Premise ID : ` + bill.PremiseId + `
                 Amount to Pay : Rwf ` + bill.Amount + `
-                \nClick here to PAY : http://localhost:5500/paybill.html`
+                \nClick here to PAY : http://127.0.0.1:5501/paybill.html`
             };
 
             transporter.sendMail(mailOptions, function(err, data) {

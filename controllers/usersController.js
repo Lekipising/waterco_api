@@ -119,10 +119,6 @@ export async function signIn(req, res) {
 
             let authToken = jwt.sign({ Email: user.Email, UserID: user.UserID },
                 process.env.AUTH_KEY, { expiresIn: "1h" });
-            // res.cookie("authToken", authToken, {
-            //     httpOnly: true,
-            //     sameSite: "strict",
-            // });
             return res.status(200).json({
                 status: true,
                 message: "User authentication successful",

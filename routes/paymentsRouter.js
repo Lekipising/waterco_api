@@ -11,7 +11,7 @@ paymentsRouter.post("/", authenticate, capturePayment);
 paymentsRouter.get("/:id", authenticate, viewPayment);
 
 //View all members payments/
-paymentsRouter.get("/", authenticate, viewAllPayments);
+paymentsRouter.get("/", viewAllPayments);
 
 //View payments by Premise payments/premise/:id
 paymentsRouter.get("/premise/:id", authenticate, viewPaymentsByPremise);

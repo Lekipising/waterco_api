@@ -8,7 +8,7 @@ const billsRouter = express.Router();
 billsRouter.post("/", authenticate, captureBill);
 
 //View all members bills/
-billsRouter.get("/", authenticate, viewAllBills);
+billsRouter.get("/", viewAllBills);
 
 //View a bills/:id
 billsRouter.get("/:id", authenticate, viewBill);

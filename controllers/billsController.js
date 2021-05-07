@@ -42,7 +42,7 @@ export async function captureBill(req, res) {
                 Bill ID : ` + bill.billid + ` 
                 Premise ID : ` + bill.PremiseId + `
                 Amount to Pay : Rwf ` + bill.Amount + `
-                \nClick here to PAY : http://127.0.0.1:5501/paybill.html`
+                \nClick here to PAY : https://waterrw.herokuapp.com//paybill.html`
             };
 
             transporter.sendMail(mailOptions, function(err, data) {

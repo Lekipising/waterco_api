@@ -104,7 +104,7 @@ export async function signIn(req, res) {
         let user = await Users.findOne({ where: { Email: req.body.Email } })
         if (!user) {
             return res.status(401).json({
-                status: failed,
+                status: false,
                 message: "Authentication Failed: User with email address not found."
             })
         }
